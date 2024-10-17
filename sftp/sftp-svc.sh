@@ -1,6 +1,7 @@
 #!/bin/bash
 
-sftp_user=julien::$(id -u)
+sftp_user=julien
+sftp_user_def=$sftp_user::$(id -u)
 sftp_home=/home/$sftp_user
 sftp_share=$sftp_home/share
 local_share=~/share
@@ -22,7 +23,7 @@ then
     -v $local_share:$sftp_share \
     --name $container_name \
     -p 2222:22 -d $image \
-    $sftp_user
+    $sftp_user_def
     echo Container $container_name started
 elif [[ "$1" == "stop" ]]
 then
